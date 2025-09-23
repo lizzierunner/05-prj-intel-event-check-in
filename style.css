@@ -5,12 +5,19 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   background-color: #f5f5f5;
   color: #333;
   line-height: 1.6;
   min-height: 100vh;
+  -webkit-text-size-adjust: 100%; /* Prevents text scaling issues on iOS */
+  text-size-adjust: 100%;
+  overflow-x: hidden; /* Prevents horizontal scroll */
 }
 
 /* Add form label styling */
@@ -101,6 +108,7 @@ body {
   display: flex;
   gap: 15px;
   width: 100%;
+  align-items: flex-end; /* Aligns button with inputs */
 }
 
 /* Form elements */
@@ -116,6 +124,7 @@ input {
   transition: all 0.3s ease;
   outline: none;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  min-width: 0; /* Prevents overflow on small screens */
 }
 
 input:focus {
@@ -139,6 +148,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-tap-highlight-color: transparent; /* Removes tap highlight on mobile */
+  touch-action: manipulation; /* Improves touch responsiveness */
 }
 
 button:hover {
@@ -415,6 +426,7 @@ button .fas {
   flex: 1;
   display: flex;
   gap: 10px;
+  min-width: 0; /* Prevents overflow */
 }
 
 select {
@@ -427,6 +439,14 @@ select {
   color: #2c3e50;
   cursor: pointer;
   min-width: 140px;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+select:focus {
+  border-color: #0071c5;
+  box-shadow: 0 0 0 4px rgba(0, 113, 197, 0.15);
 }
 
 /* Team Stats */
@@ -479,32 +499,269 @@ select {
     padding: 35px 20px;
   }
   .hero h1 {
-    font-size: 38px;
+    font-size: 32px;
+  }
+  .hero p {
+    font-size: 18px;
   }
   .container {
-    padding: 32px;
-    margin: 0 15px 30px;
+    padding: 20px;
+    margin: 0 10px 30px;
+    width: calc(100% - 20px);
   }
 
   .form-group {
     flex-direction: column;
+    gap: 12px;
   }
 
   input,
-  button {
+  button,
+  select {
     width: 100%;
   }
 
   button {
     height: 50px;
+    min-width: unset;
   }
 
   .input-wrapper {
     flex-direction: column;
+    gap: 12px;
   }
 
   .teams-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .team-card {
+    padding: 12px;
+  }
+
+  .attendance-tracker {
+    width: calc(100% - 20px);
+    padding: 0 10px;
+  }
+
+  .attendance-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  #resetBtn {
+    margin-left: 0 !important;
+    margin-top: 5px;
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+
+  .progress-container {
+    max-width: 100%;
+    height: 20px;
+  }
+
+  .progress-percentage {
+    font-size: 11px;
+  }
+
+  .attendee-list {
+    padding: 16px;
+    margin-top: 30px;
+  }
+
+  .attendee-list h3 {
+    font-size: 20px;
+  }
+
+  .attendee-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .attendee-info {
+    width: 100%;
+  }
+
+  .attendee-team {
+    align-self: flex-end;
+    min-width: 120px;
+  }
+
+  .search-input {
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container {
+    width: 95%;
+    padding: 24px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .teams-grid {
+    gap: 12px;
+  }
+
+  .form-group {
+    gap: 12px;
+  }
+
+  .attendee-list {
+    padding: 20px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .hero {
+    padding: 25px 15px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .intel-logo {
+    max-width: 80px;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    padding: 16px;
+    margin: 0 5px 20px;
+    width: calc(100% - 10px);
+  }
+
+  .check-in {
+    padding: 20px;
+  }
+
+  .form-label {
+    font-size: 16px;
+  }
+
+  input, select {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 0 20px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .attendance-tracker {
+    width: calc(100% - 10px);
+    padding: 0 5px;
+  }
+
+  .attendance-header {
+    font-size: 15px;
+  }
+
+  #attendeeCount {
+    font-size: 20px;
+  }
+
+  .progress-container {
+    height: 18px;
+    margin: 10px auto;
+  }
+
+  .progress-percentage {
+    font-size: 10px;
+  }
+
+  .team-stats h3 {
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+
+  .team-card {
+    padding: 10px;
+  }
+
+  .team-name {
+    font-size: 14px;
+  }
+
+  .attendee-list {
+    padding: 12px;
+    margin-top: 25px;
+  }
+
+  .attendee-list h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .attendee-item {
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+
+  .attendee-name {
+    font-size: 15px;
+  }
+
+  .attendee-number {
+    font-size: 11px;
+  }
+
+  .attendee-team {
+    font-size: 12px;
+    padding: 4px 10px;
+    min-width: 110px;
+  }
+
+  .search-input {
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+
+  .attendee-summary {
+    padding: 12px;
+    margin-top: 15px;
+  }
+
+  .attendee-summary p {
+    font-size: 14px;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 800px;
+  }
+
+  .attendance-tracker {
+    max-width: 800px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+  }
+
+  .hero p {
+    font-size: 24px;
   }
 }
 
@@ -515,6 +772,7 @@ select {
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Prevents horizontal scroll */
 }
 
 .attendee-list h3 {
