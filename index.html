@@ -29,9 +29,13 @@
       <div class="attendance-header">
         <i class="fas fa-users"></i>
         Attendance: <span id="attendeeCount">0</span>/50
+        <button id="resetBtn" style="margin-left: 15px; padding: 5px 10px; background-color: #ff6b6b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+          <i class="fas fa-redo"></i> Reset Progress
+        </button>
       </div>
-      <div class="progress-container">
+      <div class="progress-container" id="progressContainer">
         <div id="progressBar" class="progress-bar"></div>
+        <span class="progress-percentage" id="progressPercentage">0%</span>
       </div>
     </div>
     <div class="container">
@@ -79,6 +83,22 @@
             <span class="team-name">⚡ Team Renewables</span>
             <span class="team-count" id="powerCount">0</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Attendee List -->
+      <div class="attendee-list">
+        <h3>Checked-In Attendees</h3>
+        <div class="attendee-search">
+          <input 
+            type="text" 
+            id="attendeeSearch" 
+            placeholder="Search attendees by name or team..." 
+            class="search-input"
+          />
+        </div>
+        <div id="attendeeListContainer">
+          <p class="no-attendees">No attendees checked in yet.</p>
         </div>
       </div>
     </div>

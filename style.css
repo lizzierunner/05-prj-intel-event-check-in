@@ -211,16 +211,30 @@ button .fas {
   font-size: 17px;
 }
 
-/* Progress container - simplified */
+/* Progress container - enhanced */
 .progress-container {
   width: 100%;
   max-width: 500px;
-  height: 16px;
-  background-color: #e0e0e0;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 8px auto;
+  height: 24px;
+  background-color: #e5e7eb;
+  border-radius: 12px;
+  overflow: visible;
+  margin: 12px auto;
   position: relative;
+  border: 2px solid #d1d5db;
+}
+
+.progress-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 700;
+  color: #1f2937;
+  z-index: 10;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .progress-bar {
@@ -229,7 +243,98 @@ button .fas {
   background-color: #0071c5;
   background-image: linear-gradient(90deg, #0071c5, #00aeef);
   border-radius: 10px;
-  transition: width 0.6s ease;
+  transition: all 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2s infinite;
+  border-radius: 10px;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Celebration Effects */
+@keyframes celebrate {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.1); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes confettiDrop {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  z-index: 1000;
+  animation: confettiDrop 3s linear;
+  pointer-events: none;
+}
+
+.winning-team {
+  position: relative;
+  animation: pulse 2s infinite;
+}
+
+.winner-badge {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  color: #8b5a00;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  border: 2px solid #ffb300;
+  animation: pulse 1.5s infinite;
+}
+
+.celebration-mode {
+  background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  animation: backgroundShift 3s ease-in-out;
+}
+
+@keyframes backgroundShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* Adjust spacing between components */
@@ -239,13 +344,39 @@ button .fas {
 
 /* Messages */
 #greeting {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   padding: 16px 20px;
   border-radius: 8px;
-  color: #333;
-  margin-bottom: 15px;
-  display: none;
+  color: #003c71;
+  background-color: #e8f4fc;
+  border: 2px solid #0068b5;
+  margin-bottom: 20px;
+  text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+#greeting.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#greeting.celebration {
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  color: #8b5a00;
+  border-color: #ffb300;
+  animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
 }
 
 .success-message {
@@ -375,4 +506,144 @@ select {
   .teams-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Attendee List Styles */
+.attendee-list {
+  margin-top: 40px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.attendee-list h3 {
+  color: #0068b5;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.attendee-search {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0068b5;
+  box-shadow: 0 0 0 3px rgba(0, 104, 181, 0.1);
+}
+
+.attendee-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border-left: 4px solid #0068b5;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.attendee-item:hover {
+  background: #f1f5f9;
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.attendee-item.water {
+  border-left-color: #0ea5e9;
+  background: linear-gradient(90deg, #f0f9ff 0%, #f8fafc 100%);
+}
+
+.attendee-item.zero {
+  border-left-color: #10b981;
+  background: linear-gradient(90deg, #ecfdf5 0%, #f8fafc 100%);
+}
+
+.attendee-item.power {
+  border-left-color: #f59e0b;
+  background: linear-gradient(90deg, #fffbeb 0%, #f8fafc 100%);
+}
+
+.attendee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.attendee-name {
+  font-weight: 600;
+  color: #374151;
+  font-size: 16px;
+}
+
+.attendee-number {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.attendee-team {
+  font-size: 13px;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+  text-align: center;
+  min-width: 140px;
+}
+
+.attendee-team.water {
+  background: #bae6fd;
+  color: #0369a1;
+}
+
+.attendee-team.zero {
+  background: #bbf7d0;
+  color: #065f46;
+}
+
+.attendee-team.power {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+.attendee-summary {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+  text-align: center;
+}
+
+.attendee-summary p {
+  margin: 4px 0;
+  color: #475569;
+}
+
+.attendee-summary strong {
+  color: #0068b5;
+}
+
+.no-attendees {
+  text-align: center;
+  color: #9ca3af;
+  font-style: italic;
+  padding: 30px 20px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 2px dashed #d1d5db;
 }
