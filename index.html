@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Floating particles background -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
     <!-- Hero section with Intel branding -->
     <div class="hero">
       <div class="hero-content">
@@ -67,6 +70,22 @@
         </div>
       </form>
 
+      <!-- Achievement Badges -->
+      <div class="achievements-section" id="achievementsSection">
+        <h3><i class="fas fa-medal"></i> Achievements Unlocked</h3>
+        <div class="badges-container" id="badgesContainer">
+          <!-- Dynamic badges will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Dynamic Leaderboard -->
+      <div class="leaderboard-section">
+        <h3><i class="fas fa-trophy"></i> Team Leaderboard</h3>
+        <div class="leaderboard" id="teamLeaderboard">
+          <!-- Dynamic content will be inserted here -->
+        </div>
+      </div>
+
       <!-- Team stats -->
       <div class="team-stats">
         <h3>Team Attendance</h3>
@@ -82,6 +101,47 @@
           <div class="team-card power">
             <span class="team-name">⚡ Team Renewables</span>
             <span class="team-count" id="powerCount">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Dashboard -->
+      <div class="stats-dashboard">
+        <h3><i class="fas fa-chart-line"></i> Event Analytics</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-info">
+              <span class="stat-value" id="checkinRate">0</span>
+              <span class="stat-label">Check-ins/Min</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🕒</div>
+            <div class="stat-info">
+              <span class="stat-value" id="avgTime">--:--</span>
+              <span class="stat-label">Avg Time</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-info">
+              <span class="stat-value" id="leadingTeam">TBD</span>
+              <span class="stat-label">Leading Team</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-info">
+              <span class="stat-value" id="completion">0%</span>
+              <span class="stat-label">Completion</span>
+            </div>
+          </div>
+        </div>
+        <div class="activity-timeline" id="activityTimeline">
+          <h4>Recent Activity</h4>
+          <div class="timeline-container" id="timelineContainer">
+            <p class="no-activity">No recent activity</p>
           </div>
         </div>
       </div>
